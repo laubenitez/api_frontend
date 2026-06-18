@@ -3,6 +3,7 @@
 
 <head>
     <%- include('../partials/head'); %>
+
 </head>
 
 <body class="container">
@@ -14,7 +15,7 @@
     <main>
         <div class="jumbotron">
             <h1>Clientes</h1>
-            <table border="2px">
+            <table id="tablita" class="display" border="2px">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -35,11 +36,7 @@
                                 <%= cliente.telefono %>
                             </td>
 
-                            <td>
-                                <form action="/clientes/eliminar/<%= cliente.email %>" method="POST">
-                                    <button type="submit">Eliminar</button>
-                                </form>
-                            </td>
+                           
                         </tr>
                         <% }); %>
                 </tbody>
@@ -51,6 +48,12 @@
         <%- include('../partials/footer'); %>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.bootstrap5.js"></script>
+
+    <script>new DataTable('#tablita');</script>
 </body>
 
 </html>
