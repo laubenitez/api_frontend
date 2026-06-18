@@ -15,12 +15,13 @@
     <main>
         <div class="jumbotron">
             <h1>Clientes</h1>
-            <table id="tablita" class="display" border="2px">
+            <table id="tablita" class="table table-dark table-hover" border="2px">
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Teléfono</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +37,44 @@
                                 <%= cliente.telefono %>
                             </td>
 
-                           
+                            <td>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">Ver detalle</button>
+                                <div class="modal" id="myModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" style="color: black;">Modal Heading</h4>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+
+                                            <!-- Modal body -->
+                                            <div class="modal-body" style="color: black;">
+                                                <p>Nombre: <%= cliente.nombre %></p>
+                                                <p>Email: <%= cliente.email %></p>
+                                                <p>Teléfono: <%= cliente.telefono %></p>
+                                            </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <button type="button" class="btn btn-outline-warning">Editar</button>
+                                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                            </td>
+
+
                         </tr>
                         <% }); %>
                 </tbody>
@@ -48,12 +86,7 @@
         <%- include('../partials/footer'); %>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.bootstrap5.js"></script>
 
-    <script>new DataTable('#tablita');</script>
 </body>
 
 </html>

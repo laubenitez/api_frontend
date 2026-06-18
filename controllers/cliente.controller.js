@@ -1,5 +1,38 @@
 const Cliente = require('../models/cliente.model');
 
+
+exports.home = async(req, res) => {
+    res.render('pages/index')
+}
+
+
+
+exports.formulario = async (req, res) => {
+    res.render('pages/formulario')
+}
+
+
+
+exports.registrar = async (req, res) => {
+
+    try{
+        let clienteNuevo = {
+            nombre: req.body.nombre,
+            email: req.body.email,
+            telefono: req.body.telefono
+        }
+
+        const clientes = await Cliente.insertOne(clienteNuevo);
+        if (clientes){
+            res.render('pages/formulario', {mensaje: 'Cliente registrado exitosamente'});
+        }else{
+            res.render('pages/formulario', {mensaje: 'Error al registrar el cliente'});
+        }
+    } catch (error){
+        res.status(500).json({ error: error.message });
+    }  
+}
+
 exports.consultar = async (req, res) => {
 
     try{
@@ -22,22 +55,6 @@ exports.consultarId = async (req, res) => {
 }
 
 
-exports.registrar = async (req, res) => {
-
-    try{
-        let clienteNuevo = {
-            nombre: req.body.nombre,
-            email: req.body.email,
-            telefono: req.body.telefono
-        }
-
-        const clientes = await Cliente.create(clienteNuevo);
-        console.log(clientes);
-        res.json(clientes);
-    } catch (error){
-        res.status(500).json({ error: error.message });
-    }  
-}
 
 exports.actualizar = async (req, res) => {
     try{

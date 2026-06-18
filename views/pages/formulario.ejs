@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container mt-3">
+            <h2>Stacked form</h2>
+            <form action="/clientes">
+                <div class="mb-3 mt-3"> <label><%=mensaje%></label><br>j
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="email" name="email">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="tel">Tel:</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="telefono" name="telefono">
+                </div>
+
+                <div class="form-check mb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+
+</body>
+
+</html>

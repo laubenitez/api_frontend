@@ -24,6 +24,9 @@ app.set('view engine', 'ejs');
 conectarDB();
 
 
+app.get('/', clienteController.home)
+app.get('/formulario', clienteController.formulario)
+
 
 app.get('/clientes', clienteController.consultar)
 app.get('/clientes/email/:email', clienteController.consultarId)
