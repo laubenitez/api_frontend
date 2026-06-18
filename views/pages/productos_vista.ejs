@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>Productos</h1>
+            <table border="2px">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach(function(producto) { %>
+                        <tr>
+                            <td><%= producto.nombre %></td>
+                            <td><%= producto.precio %></td>
+                            <td><%= producto.stock %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+</html>
