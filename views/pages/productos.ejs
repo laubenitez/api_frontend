@@ -14,33 +14,31 @@
 
     <main>
         <div class="jumbotron">
-            <h1>Clientes</h1>
+            <h1>Productos</h1>
             <table id="tablita" class="table table-dark table-hover" border="2px">
-
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% clientes.forEach(function(cliente) { %>
+                    <% productos.forEach(function(producto) { %>
                         <tr>
                             <td>
-                                <%= cliente.nombre %>
+                                <%= producto.nombre %>
                             </td>
                             <td>
-                                <%= cliente.email %>
+                                <%= producto.precio %>
                             </td>
                             <td>
-                                <%= cliente.telefono %>
+                                <%= producto.stock %>
                             </td>
 
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#myModal">Ver detalle</button>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">Ver detalle</button>
                                 <div class="modal" id="myModal">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -54,12 +52,9 @@
 
                                             <!-- Modal body -->
                                             <div class="modal-body" style="color: black;">
-                                                <p>Nombre: <%= cliente.nombre %>
-                                                </p>
-                                                <p>Email: <%= cliente.email %>
-                                                </p>
-                                                <p>Teléfono: <%= cliente.telefono %>
-                                                </p>
+                                                <p>Nombre: <%= producto.nombre %></p>
+                                                <p>Precio: <%= producto.precio %></p>
+                                                <p>Stock: <%= producto.stock %></p>
                                             </div>
 
                                             <!-- Modal footer -->

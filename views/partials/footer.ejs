@@ -5,4 +5,10 @@
 <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.3.8/js/dataTables.bootstrap5.js"></script>
 
-<script>new DataTable('#tablita');</script>
+<script>
+    new DataTable('#tablita', {
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/2.3.8/i18n/es-ES.json"
+        }
+    });
+</script>

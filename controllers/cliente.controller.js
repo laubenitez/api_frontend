@@ -38,9 +38,9 @@ exports.consultar = async (req, res) => {
 
     try{
         const clientes = await Cliente.find();
-        res.json(clientes);
+        res.render('pages/clientes', { clientes });
     } catch (error){
-        res.status(500).json({ error: error.message });
+        res.render('pages/error', { error: error.message });
     }
 }
 

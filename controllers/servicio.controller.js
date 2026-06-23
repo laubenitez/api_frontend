@@ -1,12 +1,40 @@
 const Servicio = require('../models/servicio.model');
 
+
+exports.form_servicios = (req, res) => {
+    res.render('pages/form_servicios', { mensaje: null });
+};
+
+exports.registrar = async (req, res) => {
+
+    try{
+        let servicioNuevo = {
+            nombre: req.body.nombre,
+            precio: req.body.precio,
+            duracionMinutos: req.body.duracionMinutos,
+            categoria: req.body.categoria
+        }
+
+        const servicios = await Servicio.create(servicioNuevo);
+        if (servicios){
+            res.render('pages/form_servicios', {mensaje: 'Servicio registrado exitosamente'});
+        }else{
+            res.render('pages/form_servicios', {mensaje: 'Error al registrar el servicio'});
+        }
+    } catch (error){
+         return res.render('pages/form_servicios', {
+            mensaje: 'Error del servidor' });
+    }
+}
+
+
 exports.consultar = async (req, res) => {
 
     try{
         const servicios = await Servicio.find();
-        res.json(servicios);
+        res.render('pages/servicios', { servicios });
     } catch (error){
-        res.status(500).json({ error: error.message });
+        res.render('pages/servicios', { error: error.message });
     }
 }
 
@@ -22,23 +50,7 @@ exports.consultarId = async (req, res) => {
 }
 
 
-exports.registrar = async (req, res) => {
 
-    try{
-        let servicioNuevo = {
-            nombre: req.body.nombre,
-            precio: req.body.precio,
-            duracionMinutos: req.body.duracionMinutos,
-            categoria: req.body.categoria
-        }
-
-        const servicios = await Servicio.create(servicioNuevo);
-        console.log(servicios);
-        res.json(servicios);
-    } catch (error){
-        res.status(500).json({ error: error.message });
-    }  
-}
 
 exports.actualizar = async (req, res) => {
     try{

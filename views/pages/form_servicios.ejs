@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container mt-3">
+            <h2>Registro de Servicios</h2>
+            <form action="/api/v1/servicios" method="POST">
+                <div class="mb-3 mt-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="precio">Precio:</label>
+                    <input type="number" class="form-control" id="precio" placeholder="precio" name="precio">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="duracion">Duración:</label>
+                    <input type="number" class="form-control" id="duracionMinutos" placeholder="duracion" name="duracion">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="categoria">Categoría:</label>
+                    <select class="form-select" name="categoria" aria-label="Default select example">
+                        <option value="CORTE">Corte</option>
+                        <option value="TINTURA">Tintura</option>
+                        <option value="PEINADO" selected>Peinado</option>
+                        <option value="TRATAMIENTO">Tratamiento</option>
+                        <option value="BARBERIA">Barbería</option>
+                    </select>
+                </div>
+
+                <% if (mensaje) { %>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <%= mensaje %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+
+</body>
+
+</html>

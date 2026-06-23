@@ -2,7 +2,6 @@ require("node:dns").setServers(["1.1.1.1", "8.8.8.8"]);
 
 require('dotenv').config();
 
-const router 
 const express = require('express');
 
 const conectarDB = require('./config/connection');
@@ -17,35 +16,17 @@ const servicioController = require('./controllers/servicio.controller');
 const productoController = require('./controllers/producto.controller');
 
 const app = express();
+const enrutamiento = require('./router/enrutamiento.router');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
+app.use('/api/v1', enrutamiento);
 
 conectarDB();
 
 
-app.get('/', clienteController.home)
-app.get('/formulario', clienteController.formulario)
 
-
-app.get('/clientes', clienteController.consultar)
-app.get('/clientes/email/:email', clienteController.consultarId)
-app.post('/clientes', clienteController.registrar)
-app.put('/clientes/email/:email', clienteController.actualizar)
-app.delete('/clientes/email/:email', clienteController.eliminar)
-
-
-app.get('/servicios', servicioController.consultar)
-app.get('/servicios/nombre/:nombre', servicioController.consultarId)
-app.post('/servicios', servicioController.registrar)
-app.put('/servicios/nombre/:nombre', servicioController.actualizar)
-app.delete('/servicios/nombre/:nombre', servicioController.eliminar)
-
-app.get('/productos', productoController.consultar)
-app.get('/productos/nombre/:nombre', productoController.consultarId)
-app.post('/productos', productoController.registrar)
-app.put('/productos/nombre/:nombre', productoController.actualizar)
-app.delete('/productos/nombre/:nombre', productoController.eliminar)
 
 
 
@@ -60,6 +41,34 @@ app.get('/clientesvista', async function(req, res) {
 
     } catch (error) {
         res.status(500).send('Error al cargar clientes');
+    }
+});
+
+app.get('/productosvista', async function(req, res) {
+    try {
+        const response = await fetch('https://api-frontend-jtxo.onrender.com/productos');
+        const data = await response.json();
+
+        res.render('pages/productos', {
+            productos: data
+        });
+
+    } catch (error) {
+        res.status(500).send('Error al cargar productos');
+    }
+});
+
+app.get('/serviciosvista', async function(req, res) {
+    try {
+        const response = await fetch('https://api-frontend-jtxo.onrender.com/servicios');
+        const data = await response.json();
+
+        res.render('pages/servicios', {
+            servicios: data
+        });
+
+    } catch (error) {
+        res.status(500).send('Error al cargar servicios');
     }
 });
 

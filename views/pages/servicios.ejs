@@ -14,33 +14,35 @@
 
     <main>
         <div class="jumbotron">
-            <h1>Clientes</h1>
+            <h1>Servicios</h1>
             <table id="tablita" class="table table-dark table-hover" border="2px">
-
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
+                        <th>Precio</th>
+                        <th>Duración</th>
+                        <th>Categoría</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% clientes.forEach(function(cliente) { %>
+                    <% servicios.forEach(function(servicio) { %>
                         <tr>
                             <td>
-                                <%= cliente.nombre %>
+                                <%= servicio.nombre %>
                             </td>
                             <td>
-                                <%= cliente.email %>
+                                <%= servicio.precio %>
                             </td>
                             <td>
-                                <%= cliente.telefono %>
+                                <%= servicio.duracion %>
+                            </td>
+                            <td>
+                                <%= servicio.categoria %>
                             </td>
 
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#myModal">Ver detalle</button>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">Ver detalle</button>
                                 <div class="modal" id="myModal">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -54,12 +56,10 @@
 
                                             <!-- Modal body -->
                                             <div class="modal-body" style="color: black;">
-                                                <p>Nombre: <%= cliente.nombre %>
-                                                </p>
-                                                <p>Email: <%= cliente.email %>
-                                                </p>
-                                                <p>Teléfono: <%= cliente.telefono %>
-                                                </p>
+                                                <p>Nombre: <%= servicio.nombre %></p>
+                                                <p>Precio: <%= servicio.precio %></p>
+                                                <p>Duración: <%= servicio.duracion %></p>
+                                                <p>Categoría: <%= servicio.categoria %></p>
                                             </div>
 
                                             <!-- Modal footer -->

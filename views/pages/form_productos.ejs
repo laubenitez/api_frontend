@@ -14,19 +14,19 @@
 
     <main>
         <div class="container mt-3">
-            <h2>Registro de Clientes</h2>
-            <form action="/api/v1/clientes" method="POST">
+            <h2>Registro de Productos</h2>
+            <form action="/api/v1/productos" method="POST">
                 <div class="mb-3 mt-3">
                     <label for="nombre">Nombre:</label>
                     <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre">
                 </div>
                 <div class="mb-3 mt-3">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="email" name="email">
+                    <label for="precio">Precio:</label>
+                    <input type="number" class="form-control" id="precio" placeholder="precio" name="precio">
                 </div>
                 <div class="mb-3 mt-3">
-                    <label for="tel">Tel:</label>
-                    <input type="text" class="form-control" id="telefono" placeholder="telefono" name="telefono">
+                    <label for="stock">Stock:</label>
+                    <input type="number" class="form-control" id="stock" placeholder="stock" name="stock">
                 </div>
 
                 <% if (mensaje) { %>
