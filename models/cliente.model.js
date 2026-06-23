@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const mongoose = require('mongoose');
 
 const clienteSchema = new mongoose.Schema({
@@ -16,23 +16,4 @@ const clienteSchema = new mongoose.Schema({
   }
 }, { versionKey: false });
 
-=======
-const mongoose = require('mongoose');
-
-const clienteSchema = new mongoose.Schema({
-  nombre: { type: String, 
-    required: [true, 'El nombre es obligatorio'] },
-  email: { 
-    type: String, 
-    required: [true, 'El email es obligatorio'], 
-    unique: true 
-  },
-  telefono: { 
-    type: String,
-    minLength: [10, 'El teléfono debe tener al menos 10 dígitos'],
-    maxLength: [15, 'El teléfono no puede tener más de 15 dígitos']
-  }
-}, { versionKey: false });
-
->>>>>>> c65f9f9d3bf0795aaad9749c7a0f20efa30178b3
 module.exports = mongoose.model('clientes', clienteSchema);
