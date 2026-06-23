@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>Clientes</h1>
+            <table id="tablita" class="table table-dark table-hover" border="2px">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% clientes.forEach(function(cliente) { %>
+                        <tr>
+                            <td>
+                                <%= cliente.nombre %>
+                            </td>
+                            <td>
+                                <%= cliente.email %>
+                            </td>
+                            <td>
+                                <%= cliente.telefono %>
+                            </td>
+
+                            <td>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">Ver detalle</button>
+                                <div class="modal" id="myModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" style="color: black;">Modal Heading</h4>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+
+                                            <!-- Modal body -->
+                                            <div class="modal-body" style="color: black;">
+                                                <p>Nombre: <%= cliente.nombre %></p>
+                                                <p>Email: <%= cliente.email %></p>
+                                                <p>Teléfono: <%= cliente.telefono %></p>
+                                            </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <button type="button" class="btn btn-outline-warning">Editar</button>
+                                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                            </td>
+
+
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+
+</body>
+
+</html>
