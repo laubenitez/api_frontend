@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container mt-3">
+            <h2>Registro de Servicios</h2>
+            <form action="/api/v1/servicios" method="POST">
+                <div class="mb-3 mt-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo se permiten letras" required>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="precio">Precio:</label>
+                    <input type="number" class="form-control" id="precio" placeholder="precio" name="precio" min="1"
+                        required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="duracionMinutos">Duración:</label>
+                    <input type="number" class="form-control" id="duracionMinutos" placeholder="duración en minutos"
+                        name="duracionMinutos" min="1" max="600" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="categoria">Categoría:</label>
+                    <select class="form-select" name="categoria">
+                        <option value="corte">Corte</option>
+                        <option value="tintura">Tintura</option>
+                        <option value="peinado" selected>Peinado</option>
+                        <option value="tratamiento">Tratamiento</option>
+                        <option value="barberia">Barbería</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+
+                <% if (mensaje) { %>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <%= mensaje %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+
+</body>
+
+</html>

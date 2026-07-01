@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container mt-3">
+            <h2>Registro de Productos</h2>
+            <form action="/api/v1/productos" method="POST">
+                <div class="mb-3 mt-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo se permiten letras" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="precio">Precio:</label>
+                    <input type="number" class="form-control" id="precio" placeholder="precio" name="precio" min="1" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="stock">Stock:</label>
+                    <input type="number" class="form-control" id="stock" placeholder="stock" name="stock" min="0" required>
+                </div>
+
+                <% if (mensaje) { %>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <%= mensaje %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+
+</body>
+
+</html>

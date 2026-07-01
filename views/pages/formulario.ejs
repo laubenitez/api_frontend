@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container mt-3">
+            <h2>Registro de Clientes</h2>
+            <form action="/api/v1/clientes" method="POST">
+                <div class="mb-3 mt-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre"
+                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo se permiten letras" required>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="email" name="email">
+                </div>
+                <div class="mb-3 mt-3">
+                    <label for="tel">Tel:</label>
+                    <input type="tel" class="form-control" id="telefono" placeholder="teléfono" name="telefono" pattern="[0-9]{10}"
+                        title="Debe tener 10 números" required>
+                </div>
+
+                <% if (mensaje) { %>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <%= mensaje %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <% } %>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+
+</body>
+
+</html>
