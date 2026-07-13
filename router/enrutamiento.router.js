@@ -18,18 +18,18 @@ router.delete('/clientes/:id', clienteController.eliminar)
 
 router.get('/form_productos', productoController.form_productos)
 router.get('/productosvista', productoController.consultar)
-router.get('/productos/nombre/:nombre', productoController.consultarId)
+router.get('/productos/:id', productoController.consultarId)
 router.post('/productos', productoController.registrar)
-router.put('/productos/nombre/:nombre', productoController.actualizar)
-router.delete('/productos/nombre/:nombre', productoController.eliminar)
+router.put('/productos/:id', productoController.actualizar)
+router.delete('/productos/:id', productoController.eliminar)
 
 
 router.get('/form_servicios', servicioController.form_servicios)
 router.get('/serviciosvista', servicioController.consultar)
-router.get('/servicios/nombre/:nombre', servicioController.consultarId)
+router.get('/servicios/:id', servicioController.consultarId)
 router.post('/servicios', servicioController.registrar)
-router.put('/servicios/nombre/:nombre', servicioController.actualizar)
-router.delete('/servicios/nombre/:nombre', servicioController.eliminar)
+router.put('/servicios/:id', servicioController.actualizar)
+router.delete('/servicios/:id', servicioController.eliminar)
 
 
 

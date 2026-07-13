@@ -38,43 +38,21 @@
                             </td>
 
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">Ver detalle</button>
-                                <div class="modal" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
+                                <button onclick="consultar('<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')"
+                                type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#consultarP">
+                                Ver detalle
+                                </button>
 
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" style="color: black;">Modal Heading</h4>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
+                                <button onclick="actualizar('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')" 
+                                    type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#actualizarP">
+                                    Editar
+                                </button>
 
-                                            <!-- Modal body -->
-                                            <div class="modal-body" style="color: black;">
-                                                <p>Nombre: <%= producto.nombre %></p>
-                                                <p>Precio: <%= producto.precio %></p>
-                                                <p>Stock: <%= producto.stock %></p>
-                                            </div>
-
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-                                <button type="button" class="btn btn-outline-warning">Editar</button>
-                                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                                <button onclick="eliminar('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')" 
+                                    type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarP">
+                                    Eliminar
+                                </button>
                             </td>
-
-
                         </tr>
                         <% }); %>
                 </tbody>
@@ -82,10 +60,148 @@
         </div>
     </main>
 
+   <!-- MODAL CONSULTAR -->
+    <div class="modal" id="consultarP">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black;">Detalles del Producto</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body" style="color: black;">
+                    <p><strong>Nombre:</strong> <span id="nombreC"></span></p>
+                    <p><strong>Precio:</strong> <span id="precioC"></span></p>
+                    <p><strong>Stock:</strong> <span id="stockC"></span></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ACTUALIZAR -->
+    <div class="modal" id="actualizarP">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black;">Actualizar Producto</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="formActualizar" method="POST">
+                    <div class="modal-body" style="color: black;">
+
+                        <input type="hidden" id="idA" name="id">
+                        <input type="hidden" name="_method" value="PUT">
+
+                        <p>
+                            Nombre:
+                            <input id="nombreA" name="nombre" class="form-control">
+                        </p>
+
+                        <p>
+                            Precio:
+                            <input id="precioA" name="precio" class="form-control">
+                        </p>
+
+                        <p>
+                            Stock:
+                            <input id="stockA" name="stock" class="form-control">
+                        </p>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">
+                            Actualizar
+                        </button>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL ELIMINAR -->
+    <div class="modal" id="eliminarP">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black;">Eliminar Producto</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="formEliminar" method="POST">
+
+                    <input type="hidden" name="_method" value="DELETE">
+
+                    <div class="modal-body" style="color: black;">
+                        <p>¿Seguro que deseas eliminar este producto?</p>
+
+                        <p><strong>Nombre:</strong> <span id="nombreE"></span></p>
+                        <p><strong>Precio:</strong> <span id="precioE"></span></p>
+                        <p><strong>Stock:</strong> <span id="stockE"></span></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">
+                            Confirmar eliminación
+                        </button>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
 
+     <script>
+        function consultar(nombre, precio, stock) {
+            document.getElementById("nombreC").textContent = nombre;
+            document.getElementById("precioC").textContent = precio;
+            document.getElementById("stockC").textContent = stock;
+        }
+
+        function actualizar(id, nombre, precio, stock) {
+            document.getElementById("idA").value = id;
+            document.getElementById("nombreA").value = nombre;
+            document.getElementById("precioA").value = precio;
+            document.getElementById("stockA").value = stock;
+
+            document.getElementById("formActualizar").action =
+                "/api/v1/productos/" + id + "?_method=PUT";
+        }
+
+        function eliminar(id, nombre, precio, stock) {
+            document.getElementById("nombreE").textContent = nombre;
+            document.getElementById("precioE").textContent = precio;
+            document.getElementById("stockE").textContent = stock;
+
+            document.getElementById("formEliminar").action =
+                "/api/v1/productos/" + id + "?_method=DELETE";
+        }
+    </script>
 
 </body>
 

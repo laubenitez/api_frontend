@@ -78,33 +78,76 @@ exports.consultarId = async (req, res) => {
 
 
 exports.actualizar = async (req, res) => {
-    try{
-        const actualizarServicio = {
-            nombre: req.body.nombre,
-            precio: req.body.precio,
-            duracionMinutos: req.body.duracionMinutos,
-            categoria: req.body.categoria
+    try {
+        const { nombre, precio, duracionMinutos, categoria } = req.body;
+
+        // Validar nombre
+        if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(nombre)) {
+            const servicios = await Servicio.find();
+            return res.render('pages/servicios', {
+                servicios,
+                mensaje: 'El nombre solo debe contener letras'
+            });
         }
 
-        const servicioActualizado = await Servicio.findOneAndUpdate(
-            { nombre: req.params.nombre }, 
-            { $set: actualizarServicio }, 
-            { new: true }
-        );
-        res.json(servicioActualizado);
-    } catch (error){
-        res.status(500).json({ error: error.message });
+        // Validar precio
+        if (precio <= 0) {
+            const servicios = await Servicio.find();
+            return res.render('pages/servicios', {
+                servicios,
+                mensaje: 'El precio debe ser mayor a 0'
+            });
         }
-}
+
+        // Validar duración
+        if (duracionMinutos <= 0) {
+            const servicios = await Servicio.find();
+            return res.render('pages/servicios', {
+                servicios,
+                mensaje: 'La duración debe ser mayor a 0'
+            });
+        }
+
+        const datos = {
+            nombre,
+            precio,
+            duracionMinutos,
+            categoria
+        };
+
+        await Servicio.findByIdAndUpdate(
+            req.params.id,
+            datos,
+            { returnDocument: 'after' }
+        );
+
+        res.redirect('/serviciosvista');
+
+    } catch (error) {
+
+        const servicios = await Servicio.find();
+
+        res.render('pages/servicios', {
+            servicios,
+            mensaje: 'Error del servidor'
+        });
+    }
+};
 
 exports.eliminar = async (req, res) => {
     try {
-        const resultado = await Servicio.deleteOne({ nombre: req.params.nombre });
 
-        res.json(resultado);
+        await Servicio.findByIdAndDelete(req.params.id);
+
+        res.redirect('/serviciosvista');
 
     } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
 
+        const servicios = await Servicio.find();
+
+        res.render('pages/servicios', {
+            servicios,
+            mensaje: 'Error al eliminar el servicio'
+        });
+    }
 };

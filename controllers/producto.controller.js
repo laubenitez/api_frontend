@@ -75,33 +75,75 @@ exports.consultarId = async (req, res) => {
 }
 
 
-
 exports.actualizar = async (req, res) => {
-    try{
-        const actualizarProducto = {
-            nombre: req.body.nombre,
-            precio: req.body.precio,
-            stock: req.body.stock
+    try {
+        const { nombre, precio, stock } = req.body;
+
+        // Validar nombre
+        if (!/^[A-Za-z0-9ÁÉÍÓÚáéíóúñÑ\s]+$/.test(nombre)) {
+            const productos = await Producto.find();
+            return res.render('pages/productos', {
+                productos,
+                mensaje: 'El nombre del producto es inválido'
+            });
         }
 
-        const productoActualizado = await Producto.findOneAndUpdate(
-            { nombre: req.params.nombre }, 
-            { $set: actualizarProducto }, 
-            { new: true }
-        );
-        res.json(productoActualizado);
-    } catch (error){
-        res.status(500).json({ error: error.message });
+        // Validar precio
+        if (precio <= 0) {
+            const productos = await Producto.find();
+            return res.render('pages/productos', {
+                productos,
+                mensaje: 'El precio debe ser mayor a 0'
+            });
         }
-}
+
+        // Validar stock
+        if (stock < 0) {
+            const productos = await Producto.find();
+            return res.render('pages/productos', {
+                productos,
+                mensaje: 'El stock no puede ser negativo'
+            });
+        }
+
+        const datos = {
+            nombre,
+            precio,
+            stock
+        };
+
+        await Producto.findByIdAndUpdate(
+            req.params.id,
+            datos,
+            { returnDocument: 'after' }
+        );
+
+        res.redirect('/productosvista');
+
+    } catch (error) {
+        const productos = await Producto.find();
+
+        res.render('pages/productos', {
+            productos,
+            mensaje: 'Error del servidor'
+        });
+    }
+};
 
 exports.eliminar = async (req, res) => {
     try {
-        const resultado = await Producto.deleteOne({ nombre: req.params.nombre });
 
-        res.json(resultado);
+        await Producto.findByIdAndDelete(req.params.id);
+
+        res.redirect('/productosvista');
 
     } catch (error) {
-        res.status(500).json({ error: error.message });
+
+        const productos = await Producto.find();
+
+        res.render('pages/productos', {
+            productos,
+            mensaje: 'Error al eliminar el producto'
+        });
     }
 };

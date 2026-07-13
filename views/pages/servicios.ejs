@@ -20,7 +20,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Precio</th>
-                        <th>Duración</th>
+                        <th>Duración en Minutos</th>
                         <th>Categoría</th>
                         <th>Acciones</th>
                     </tr>
@@ -35,48 +35,34 @@
                                 <%= servicio.precio %>
                             </td>
                             <td>
-                                <%= servicio.duracion %>
+                                <%= servicio.duracionMinutos %>
                             </td>
                             <td>
                                 <%= servicio.categoria %>
                             </td>
 
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModal">Ver detalle</button>
-                                <div class="modal" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" style="color: black;">Modal Heading</h4>
-                                                <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal"></button>
-                                            </div>
-
-                                            <!-- Modal body -->
-                                            <div class="modal-body" style="color: black;">
-                                                <p>Nombre: <%= servicio.nombre %></p>
-                                                <p>Precio: <%= servicio.precio %></p>
-                                                <p>Duración: <%= servicio.duracion %></p>
-                                                <p>Categoría: <%= servicio.categoria %></p>
-                                            </div>
-
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger"
-                                                    data-bs-dismiss="modal">Close</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                <button
+                                    onclick="consultar('<%= servicio.nombre %>', '<%= servicio.precio %>', '<%= servicio.duracionMinutos %>', '<%= servicio.categoria %>')"
+                                    type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#consultarS">
+                                    Ver detalle
+                                </button>
 
 
+                                <button
+                                    onclick="actualizar('<%= servicio._id %>', '<%= servicio.nombre %>', '<%= servicio.precio %>', '<%= servicio.duracionMinutos %>', '<%= servicio.categoria %>')"
+                                    type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#actualizarS">
+                                    Editar
+                                </button>
 
-
-                                <button type="button" class="btn btn-outline-warning">Editar</button>
-                                <button type="button" class="btn btn-outline-danger">Eliminar</button>
+                                <button
+                                    onclick="eliminar('<%= servicio._id %>', '<%= servicio.nombre %>', '<%= servicio.precio %>', '<%= servicio.duracionMinutos %>', '<%= servicio.categoria %>')"
+                                    type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#eliminarS">
+                                    Eliminar
+                                </button>
                             </td>
 
 
@@ -87,9 +73,170 @@
         </div>
     </main>
 
+
+    <!-- MODAL CONSULTAR -->
+    <div class="modal" id="consultarS">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black;">Detalles del Servicio</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body" style="color: black;">
+                    <p><strong>Nombre:</strong> <span id="nombreS"></span></p>
+                    <p><strong>Precio:</strong> <span id="precioS"></span></p>
+                    <p><strong>Duración en Minutos:</strong> <span id="duracionMinutos"></span></p>
+                    <p><strong>Categoría:</strong> <span id="categoriaS"></span></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL ACTUALIZAR -->
+    <div class="modal" id="actualizarS">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black;">Actualizar Servicio</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="formActualizarS" method="POST">
+                    <div class="modal-body" style="color: black;">
+
+                        <input type="hidden" id="idA" name="id">
+                        <input type="hidden" name="_method" value="PUT">
+
+                        <p>
+                            Nombre:
+                            <input id="nombreA" name="nombre" class="form-control">
+                        </p>
+
+                        <p>
+                            Precio:
+                            <input id="precioA" name="precio" class="form-control">
+                        </p>
+
+                        <p>
+                            Duración en Minutos:
+                            <input id="duracionMinutosA" name="duracionMinutos" class="form-control">
+                        </p>
+
+                        <p>
+                            Categoría:
+                            <select class="form-select" id="categoriaA" name="categoria">
+                                <option value="corte">Corte</option>
+                                <option value="tintura">Tintura</option>
+                                <option value="peinado" selected>Peinado</option>
+                                <option value="tratamiento">Tratamiento</option>
+                                <option value="barberia">Barbería</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </p>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">
+                            Actualizar
+                        </button>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL ELIMINAR -->
+    <div class="modal" id="eliminarS">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black;">Eliminar Servicio</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="formEliminarS" method="POST">
+
+                    <input type="hidden" name="_method" value="DELETE">
+
+                    <div class="modal-body" style="color: black;">
+                        <p>¿Seguro que deseas eliminar este servicio?</p>
+
+                        <p><strong>Nombre:</strong> <span id="nombreE"></span></p>
+                        <p><strong>Precio:</strong> <span id="precioE"></span></p>
+                        <p><strong>Duración en Minutos:</strong> <span id="duracionMinutosE"></span></p>
+                        <p><strong>Categoría:</strong> <span id="categoriaE"></span></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">
+                            Confirmar eliminación
+                        </button>
+
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
+
+    <script>
+        function consultar(nombre, precio, duracionMinutos, categoria) {
+            document.getElementById('nombreS').textContent = nombre;
+            document.getElementById('precioS').textContent = precio;
+            document.getElementById('duracionMinutos').textContent = duracionMinutos;
+            document.getElementById('categoriaS').textContent = categoria;
+        }
+
+        function actualizar(id, nombre, precio, duracionMinutos, categoria) {
+            document.getElementById("idA").value = id;
+            document.getElementById('nombreA').value = nombre;
+            document.getElementById('precioA').value = precio;
+            document.getElementById('duracionMinutosA').value = duracionMinutos;
+            document.getElementById('categoriaA').value = categoria;
+
+            document.getElementById("formActualizarS").action =
+                "/api/v1/servicios/" + id + "?_method=PUT";
+        }
+
+        function eliminar(id, nombre, precio, duracionMinutos, categoria) {
+            document.getElementById('nombreE').textContent = nombre;
+            document.getElementById('precioE').textContent = precio;
+            document.getElementById('duracionMinutosE').textContent = duracionMinutos;
+            document.getElementById('categoriaE').textContent = categoria;
+
+
+            document.getElementById("formEliminarS").action =
+                "/api/v1/servicios/" + id + "?_method=DELETE";
+        }
+
+
+    </script>
+
 
 
 </body>
