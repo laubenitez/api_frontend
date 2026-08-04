@@ -1,0 +1,140 @@
+/* ==========================================
+   CONFIGURACIÓN GENERAL & NAVBAR FULL WIDTH
+   ========================================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #fff5f8;
+}
+
+/* Forzar que cualquier header o barra de navegación superior cubra de lado a lado y desde arriba */
+header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ajustes para el Navbar negro superior para que pegue exactamente al techo */
+.navbar, nav {
+  width: 100% !important;
+  margin-top: 0 !important;
+  border-radius: 0 !important;
+}
+
+:root {
+  --pink-primary: #f74b8d;
+  --pink-secondary: #ff85b3;
+  --pink-light: #ffd6e7;
+  --pink-soft-bg: #fff5f8;
+}
+
+.text-catalogue-title,
+.text-price,
+.text-pink-dark {
+  color: var(--pink-primary) !important;
+}
+
+.bg-pink-light {
+  background-color: var(--pink-light) !important;
+}
+
+/* ==========================================
+   TARJETAS Y SOLUCIÓN DE IMÁGENES "MOCHAS"
+   ========================================== */
+.product-card {
+  background-color: #ffffff;
+  border-radius: 1rem !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-img-wrapper {
+  width: 100%;
+  height: 220px; /* Altura fija uniforme */
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Cambiado a contain para que la imagen completa se vea sin cortes feos */
+  padding: 10px;
+  transition: transform 0.4s ease;
+}
+
+/* Efecto Hover en Tarjeta */
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1rem 2rem rgba(247, 75, 141, 0.15) !important;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.06);
+}
+
+/* ==========================================
+   BOTONES PRINCIPALES
+   ========================================== */
+.btn-pink-custom {
+  background-color: var(--pink-primary);
+  border: none;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-pink-custom:hover {
+  background-color: var(--pink-secondary);
+  color: #ffffff;
+}
+
+.btn-pink-custom:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================
+   CARRITO OFFCANVAS & IMÁGENES DEL MODAL
+   ========================================== */
+.cart-item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain; /* Evita que las imágenes se deformen dentro del carrito */
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  padding: 4px;
+}
+
+/* ==========================================
+   BOTONES DE CANTIDAD (ROJO MENOS, VERDE MÁS)
+   ========================================== */
+.btn-qty-minus {
+  background-color: #dc3545 !important; /* Rojo */
+  color: white !important;
+  border: none !important;
+  font-weight: bold;
+}
+
+.btn-qty-minus:hover {
+  background-color: #bb2d3b !important;
+}
+
+.btn-qty-plus {
+  background-color: #198754 !important; /* Verde */
+  color: white !important;
+  border: none !important;
+  font-weight: bold;
+}
+
+.btn-qty-plus:hover {
+  background-color: #157347 !important;
+}
+
+.quantity-controls input {
+  font-weight: bold;
+  color: #333;
+}

@@ -18,6 +18,7 @@
             <table id="tablita" class="table table-dark table-hover" border="2px">
                 <thead>
                     <tr>
+                        <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Stock</th>
@@ -27,6 +28,10 @@
                 <tbody>
                     <% productos.forEach(function(producto) { %>
                         <tr>
+                            <td>
+                                <img src="<%= producto.imagen %>" class="img-producto">
+                            </td>
+
                             <td>
                                 <%= producto.nombre %>
                             </td>
@@ -38,17 +43,17 @@
                             </td>
 
                             <td>
-                                <button onclick="consultar('<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')"
+                                <button onclick="consultar('<%= producto.imagen %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')"
                                 type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#consultarP">
                                 Ver detalle
                                 </button>
 
-                                <button onclick="actualizar('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')" 
+                                <button onclick="actualizar('<%= producto._id %>', '<%= producto.imagen %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')" 
                                     type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#actualizarP">
                                     Editar
                                 </button>
 
-                                <button onclick="eliminar('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')" 
+                                <button onclick="eliminar('<%= producto._id %>', '<%= producto.imagen %>', '<%= producto.nombre %>', '<%= producto.precio %>', '<%= producto.stock %>')" 
                                     type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarP">
                                     Eliminar
                                 </button>
@@ -71,6 +76,7 @@
                 </div>
 
                 <div class="modal-body" style="color: black;">
+                    <p><img id="imagenC" class="img-producto"></p>
                     <p><strong>Nombre:</strong> <span id="nombreC"></span></p>
                     <p><strong>Precio:</strong> <span id="precioC"></span></p>
                     <p><strong>Stock:</strong> <span id="stockC"></span></p>
@@ -101,6 +107,8 @@
 
                         <input type="hidden" id="idA" name="id">
                         <input type="hidden" name="_method" value="PUT">
+
+                        <p><img id="imagenA" class="img-producto"></p>
 
                         <p>
                             Nombre:
@@ -152,6 +160,7 @@
                     <div class="modal-body" style="color: black;">
                         <p>¿Seguro que deseas eliminar este producto?</p>
 
+                        <p><img id="imagenE" class="img-producto"></p>
                         <p><strong>Nombre:</strong> <span id="nombreE"></span></p>
                         <p><strong>Precio:</strong> <span id="precioE"></span></p>
                         <p><strong>Stock:</strong> <span id="stockE"></span></p>
@@ -177,14 +186,16 @@
     </footer>
 
      <script>
-        function consultar(nombre, precio, stock) {
+        function consultar(imagen, nombre, precio, stock) {
+            document.getElementById("imagenC").src = imagen;
             document.getElementById("nombreC").textContent = nombre;
             document.getElementById("precioC").textContent = precio;
             document.getElementById("stockC").textContent = stock;
         }
 
-        function actualizar(id, nombre, precio, stock) {
+        function actualizar(id, imagen, nombre, precio, stock) {
             document.getElementById("idA").value = id;
+            document.getElementById("imagenA").src = imagen;
             document.getElementById("nombreA").value = nombre;
             document.getElementById("precioA").value = precio;
             document.getElementById("stockA").value = stock;
@@ -193,7 +204,8 @@
                 "/api/v1/productos/" + id + "?_method=PUT";
         }
 
-        function eliminar(id, nombre, precio, stock) {
+        function eliminar(id, imagen, nombre, precio, stock) {
+            document.getElementById("imagenE").src = imagen;
             document.getElementById("nombreE").textContent = nombre;
             document.getElementById("precioE").textContent = precio;
             document.getElementById("stockE").textContent = stock;

@@ -11,7 +11,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/api/v1/clientesvista">Listar</a></li>
             <li><a class="dropdown-item" href="/api/v1/formulario">Registrar</a></li>
-            
+
           </ul>
         </li>
 
@@ -30,7 +30,22 @@
             <li><a class="dropdown-item" href="/api/v1/form_servicios">Registrar</a></li>
           </ul>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/api/v1/catalogo">Catálogo</a>
+        </li>
+
       </ul>
+      
+      <button class="btn btn-pink position-relative" onclick="abrirCarrito()">
+        <i class="bi bi-cart3 fs-4"></i>
+        <span id="contadorCarrito"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          0
+        </span>
+      </button>
+
+
     </div>
   </div>
 </nav>

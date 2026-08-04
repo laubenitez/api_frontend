@@ -17,29 +17,41 @@
             <h2>Registro de Productos</h2>
             <form action="/api/v1/productos" method="POST">
                 <div class="mb-3 mt-3">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre"
-                        pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo se permiten letras" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="precio">Precio:</label>
-                    <input type="number" class="form-control" id="precio" placeholder="precio" name="precio" min="1" required>
-                </div>
-                <div class="mb-3 mt-3">
-                    <label for="stock">Stock:</label>
-                    <input type="number" class="form-control" id="stock" placeholder="stock" name="stock" min="0" required>
+                    <label for="imagen">Imagen:</label>
+
+                    <select class="form-control" id="imagen" name="imagen">
+                        <option value="/img/mascarilla.jpg">Mascarilla</option>
+                        <option value="/img/tinte.jpg">Tinte</option>
+                        <option value="/img/termoprotector.jpg">Termoprotector</option>
+                        <option value="/img/papel.jpg">Papel Higiénico</option>
+                        <option value="/img/shampoo.webp">Shampoo</option>
+                        <option value="/img/sellador.png">Sellador de Puntas</option>
+                    </select>
                 </div>
 
-                <% if (mensaje) { %>
-                    <div class="alert alert-success alert-dismissible fade show">
-                        <%= mensaje %>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                    <% } %>
-
-                        <button type="submit" class="btn btn-success">Guardar</button>
-            </form>
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" placeholder="nombre" name="nombre"
+                    pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+" title="Solo se permiten letras" required>
         </div>
+        <div class="mb-3 mt-3">
+            <label for="precio">Precio:</label>
+            <input type="number" class="form-control" id="precio" placeholder="precio" name="precio" min="1" required>
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="stock">Stock:</label>
+            <input type="number" class="form-control" id="stock" placeholder="stock" name="stock" min="0" required>
+        </div>
+
+        <% if (mensaje) { %>
+            <div class="alert alert-success alert-dismissible fade show">
+                <%= mensaje %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <% } %>
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+                </form>
+                </div>
 
     </main>
 

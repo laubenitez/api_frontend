@@ -31,6 +31,7 @@ exports.registrar = async (req, res) => {
         }
 
         let productoNuevo = {
+            imagen: req.body.imagen,
             nombre: req.body.nombre,
             precio: req.body.precio,
             stock: req.body.stock,
@@ -54,15 +55,16 @@ exports.registrar = async (req, res) => {
 
 
 exports.consultar = async (req, res) => {
-
-    try{
+    try {
         const productos = await Producto.find();
+
+        console.log(productos);
+
         res.render('pages/productos', { productos });
-    } catch (error){
+    } catch (error) {
         res.render('pages/productos', { error: error.message });
     }
 }
-
 exports.consultarId = async (req, res) => {
 
     try{
@@ -77,7 +79,7 @@ exports.consultarId = async (req, res) => {
 
 exports.actualizar = async (req, res) => {
     try {
-        const { nombre, precio, stock } = req.body;
+        const { imagen, nombre, precio, stock } = req.body;
 
         // Validar nombre
         if (!/^[A-Za-z0-9ÁÉÍÓÚáéíóúñÑ\s]+$/.test(nombre)) {
@@ -107,6 +109,7 @@ exports.actualizar = async (req, res) => {
         }
 
         const datos = {
+            imagen,
             nombre,
             precio,
             stock
@@ -144,6 +147,21 @@ exports.eliminar = async (req, res) => {
         res.render('pages/productos', {
             productos,
             mensaje: 'Error al eliminar el producto'
+        });
+    }
+};
+
+exports.catalogo = async (req, res) => {
+    try {
+        const productos = await Producto.find();
+
+        res.render('pages/catalogo', { productos });
+
+    } catch (error) {
+        console.log(error);
+        res.render('pages/catalogo', {
+            productos: [],
+            mensaje: 'Error al cargar el catálogo'
         });
     }
 };

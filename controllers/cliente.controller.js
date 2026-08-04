@@ -5,8 +5,6 @@ exports.home = async(req, res) => {
     res.render('pages/index')
 }
 
-
-
 exports.formulario = async (req, res) => {
     res.render('pages/formulario', { mensaje: null })
 }

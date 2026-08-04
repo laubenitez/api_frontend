@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/', clienteController.home)
 router.get('/formulario', clienteController.formulario)
+router.get('/catalogo', productoController.catalogo)
+
 
 
 router.get('/clientesvista', clienteController.consultar)
